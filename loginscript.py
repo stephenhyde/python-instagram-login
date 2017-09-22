@@ -88,6 +88,15 @@ class LoginScript:
             self.write_log('Login error! Connection error!')
             return False
 
+    def logout(self):
+        try:
+            logout_post = {'csrfmiddlewaretoken': self.csrftoken}
+            self.s.post(self.url_logout, data=logout_post)
+            self.write_log("Logout success!")
+            self.login_status = False
+        except:
+            self.write_log("Logout error!")
+
     def write_log(self, log_text):
         """ Write log by print() or logger """
 
